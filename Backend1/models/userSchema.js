@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
         enum:["Teacher" , "Student"],
         default:"Student",
         required:true
+    },
+    resetOTP:{
+        type:String,
+        default:null
+    },
+    otpExpiry:{
+        type:Date,
+        default:null
     }
 })
 

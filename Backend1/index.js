@@ -1,15 +1,27 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 // const routes = require('./routes/userRoutes')
 // const proutes = require('./routes/projectRoutes')
-const cors = require('cors')
+//const cors = require('cors')
 const app = express()
 app.use(express.json())
 const routes = require('./routes/userRoutes')
 const proutes = require('./routes/projectRoutes')
 const userRoutes=require("./routes/userRoutes")
-app.use(cors())
-require('dotenv').config()
+//app.use(cors())
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 //app.use("/api",userRoutes)
 
 mongoose.connect(process.env.MONGO_URL)

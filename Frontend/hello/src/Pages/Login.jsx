@@ -89,6 +89,18 @@ const Login = () => {
         />
       </div>
 
+        <div className="text-center mt-3">
+    <span
+        style={{
+            color: "blue",
+            cursor: "pointer"
+        }}
+        onClick={() => navigate("/forgot-password")}
+    >
+        Forgot Password?
+    </span>
+</div>
+
       {/* Button */}
       <button
         type="submit"

@@ -5,6 +5,7 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import StudentDashboard from './Pages/StudentDashboard'
 import TeacherDashboard from './Pages/TeacherDashboard'
+import ForgotPassword from "./Pages/ForgotPassword";
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
        <Route path='/studentdashboard' element={<StudentDashboard/>}/>
          <Route path='/teacherdashboard' element={<TeacherDashboard/>}/> 
+         <Route path="/forgot-password" element={<ForgotPassword />}
+/>
       </Routes>
       </BrowserRouter>
     </div>
