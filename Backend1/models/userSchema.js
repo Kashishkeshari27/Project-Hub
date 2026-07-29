@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 const bcrypt=require('bcrypt')
 
@@ -28,7 +27,11 @@ const userSchema = new mongoose.Schema({
     otpExpiry:{
         type:Date,
         default:null
-    }
+    },
+    otpVerified: {
+    type: Boolean,
+    default: false
+},
 })
 
 userSchema.pre("save", async function (next){
@@ -41,7 +44,6 @@ next()
 } catch (error) {
     console.log(error)
 }
-
 })
 module.exports =mongoose.model("User" , userSchema)
 

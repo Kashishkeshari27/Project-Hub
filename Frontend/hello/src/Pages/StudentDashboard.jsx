@@ -276,7 +276,11 @@ const StudentDashboard = () => {
           >
             Submit Project
           </button>
-
+              <button
+    onClick={() => navigate("/profile")}
+>
+    Profile
+</button>
         </form>
 
       </div>

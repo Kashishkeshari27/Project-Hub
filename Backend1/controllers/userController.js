@@ -94,7 +94,6 @@ const forgotPassword = async (req, res) => {
             });
         }
 
-        // Check whether user exists
         const user = await Users.findOne({ email });
 
         if (!user) {
@@ -103,16 +102,13 @@ const forgotPassword = async (req, res) => {
             });
         }
 
-        // Generate 6-digit OTP
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-        // Save OTP and expiry (10 minutes)
         user.resetOTP = otp;
         user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
+        user.otpVerified=false;
         await user.save();
 
-        // Send Email
         await sendEmail(
             user.email,
             "Project Hub Password Reset OTP",
@@ -162,7 +158,8 @@ const verifyOTP = async (req, res) => {
                 message: "OTP has expired"
             });
         }
-
+        user.otpVerified=true;
+        await user.save();
         return res.status(200).json({
             message: "OTP verified successfully"
         });
@@ -194,13 +191,17 @@ const resetPassword = async (req, res) => {
                 message: "User not found"
             });
         }
-
-        // Password update
+        if (!user.otpVerified) {
+    return res.status(400).json({
+        message: "Please verify OTP first"
+    });
+}
+        
         user.password = newPassword;
 
-        // Clear OTP
         user.resetOTP = null;
         user.otpExpiry = null;
+        user.otpVerified=false;
 
         // pre("save") automatically hashes the password
         await user.save();
@@ -218,6 +219,28 @@ const resetPassword = async (req, res) => {
         });
     }
 }
-module.exports = {login, register, dashboard, uploadFiles ,teachers,forgotPassword,verifyOTP,resetPassword}
+
+const profile = async (req, res) => {
+    try {
+
+        const user = await Users.findById(req.params.id).select("-password");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.status(200).json(user);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Something went wrong"
+        });
+
+    }
+}
+module.exports = {login, register, dashboard, uploadFiles ,teachers,forgotPassword,verifyOTP,resetPassword,profile}
 
 

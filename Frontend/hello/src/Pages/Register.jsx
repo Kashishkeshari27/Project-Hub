@@ -38,9 +38,9 @@ const register =async(e)=>{
 
 }
 
-useEffect(()=>{
-     register()
- },[])
+// useEffect(()=>{
+//      register()
+//  },[])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black flex items-center justify-center relative overflow-hidden">

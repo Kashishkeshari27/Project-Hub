@@ -5,7 +5,11 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import StudentDashboard from './Pages/StudentDashboard'
 import TeacherDashboard from './Pages/TeacherDashboard'
-import ForgotPassword from "./Pages/ForgotPassword";
+import ForgotPassword from "./Pages/ForgotPassword"
+import VerifyOTP from "./Pages/VerifyOTP"
+import ResetPassword from "./Pages/ResetPassword"
+import ProtectedRoute from './Pages/ProtectedRoute'
+import Profile from './Pages/Profile'
 
 const App = () => {
   return (
@@ -15,11 +19,14 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-       <Route path='/studentdashboard' element={<StudentDashboard/>}/>
-         <Route path='/teacherdashboard' element={<TeacherDashboard/>}/> 
-         <Route path="/forgot-password" element={<ForgotPassword />}
-/>
+       <Route path='/studentdashboard' element={<ProtectedRoute allowedRole="Student"><StudentDashboard/></ProtectedRoute>}/>
+         <Route path='/teacherdashboard' element={<ProtectedRoute allowedRole="Teacher"><TeacherDashboard/></ProtectedRoute>}/> 
+         <Route path="/forgot-password" element={<ForgotPassword />}/>
+         <Route path="/verify-otp" element={<VerifyOTP/>}/>
+         <Route path="/reset-password" element={<ResetPassword />} />
+         <Route path='/profile' element={<Profile/>}/>
       </Routes>
+
       </BrowserRouter>
     </div>
   )

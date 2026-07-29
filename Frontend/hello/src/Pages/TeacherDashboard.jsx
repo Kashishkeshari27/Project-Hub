@@ -219,7 +219,11 @@ const Rejected = async(pid)=>{
             >
               Reject
             </button>
-
+              <button
+    onClick={() => navigate("/profile")}
+>
+    Profile
+</button>
           </div>
 
         </div>
