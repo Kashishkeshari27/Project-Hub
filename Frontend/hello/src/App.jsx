@@ -10,6 +10,7 @@ import VerifyOTP from "./Pages/VerifyOTP"
 import ResetPassword from "./Pages/ResetPassword"
 import ProtectedRoute from './Pages/ProtectedRoute'
 import Profile from './Pages/Profile'
+import EditProfile from './Pages/EditProfile'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
          <Route path="/verify-otp" element={<VerifyOTP/>}/>
          <Route path="/reset-password" element={<ResetPassword />} />
          <Route path='/profile' element={<Profile/>}/>
+         <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>
 
       </BrowserRouter>

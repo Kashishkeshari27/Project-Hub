@@ -241,6 +241,35 @@ const profile = async (req, res) => {
 
     }
 }
-module.exports = {login, register, dashboard, uploadFiles ,teachers,forgotPassword,verifyOTP,resetPassword,profile}
+const updateProfile = async (req, res) => {
+    try {
+        const { name, email } = req.body;
+
+        const user = await Users.findByIdAndUpdate(
+            req.params.id,
+            {
+                name,
+                email,
+            },
+            {
+                new: true,
+            }
+        ).select("-password");
+
+        res.status(200).json({
+            message: "Profile Updated Successfully",
+            user,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Something went wrong",
+        });
+
+    }
+}
+
+module.exports = {login, register, dashboard, uploadFiles ,teachers,forgotPassword,verifyOTP,resetPassword,profile,updateProfile}
 
 
